@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Vector\Vector.h">
+    <ClCompile Include="Source\Vector\Vector.h">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
