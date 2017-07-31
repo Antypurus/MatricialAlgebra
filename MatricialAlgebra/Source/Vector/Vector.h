@@ -55,6 +55,8 @@ namespace MatricialAlgebra {
 		@return returns whether or not this vector is a null object
 		*/
 		constexpr bool isNUll()const;
+
+		constexpr bool isAsync()const;
 	};
 
 	template<typename T>
@@ -124,12 +126,22 @@ namespace MatricialAlgebra {
 		return ret;
 	}
 
+	//The product of a scalar by a vector
 	template<typename T>
 	inline constexpr Vector<T> Vector<T>::operator*(const T & scalar) const
 	{
-		return Vector<T>();
+		if(this->m_isNULL){
+			return Vector<T>();
+		}
+		
+		Vector<T> ret(this->m_Size);
+		for (size_t i = 0;i < this->m_Size;++i) {
+			ret[i] = this->at(i) * scalar;
+		}
+		return ret;
 	}
 
+	//The dot product
 	template<typename T>
 	inline constexpr Vector<T> Vector<T>::operator*(const Vector<T>& val) const
 	{
@@ -140,5 +152,10 @@ namespace MatricialAlgebra {
 	inline constexpr bool Vector<T>::isNUll() const
 	{
 		return this->m_isNULL;
+	}
+	template<typename T>
+	inline constexpr bool Vector<T>::isAsync() const
+	{
+		return this->m_isAsync;
 	}
 }

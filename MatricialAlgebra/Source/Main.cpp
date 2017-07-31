@@ -14,7 +14,7 @@ void main() {
 	b[0] = 6;
 	b[1] = 5;
 
-	auto res = a - b;
+	auto res = a*2;
 
 	cout << "x:" << res[0] << '\n';
 	cout << "y:" << res[1] << '\n';
