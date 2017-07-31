@@ -43,7 +43,17 @@ namespace MatricialAlgebra {
 		@return vector that is the sum of both vectors
 		*/
 		constexpr Vector<T> operator+(const Vector<T>& val)const;
+
+		constexpr Vector<T> operator-(const Vector<T>&val)const;
+
+		constexpr Vector<T> operator*(const T& scalar)const;
+
+		constexpr Vector<T> operator*(const Vector<T>& val)const;
 		
+		/*
+		returns the null flag value for this vector
+		@return returns whether or not this vector is a null object
+		*/
 		constexpr bool isNUll()const;
 	};
 
@@ -77,22 +87,55 @@ namespace MatricialAlgebra {
 		return this->m_Vector.at(val);
 	}
 
+	//TODO: need to update this with the async flag
 	template<typename T>
 	constexpr inline Vector<T> Vector<T>::operator+(const Vector<T> & val) const
 	{
 		//If the mathematical vectors are not of the same size
 		//the operation cannot be executed and therefore a NULL
 		//object is returned
-		if (this->m_Size != val.getSize()) {
+		if (this->m_Size != val.m_Size) {
+			return Vector<T>();
+		}else if (this->m_isNULL || val.m_isNULL) {
 			return Vector<T>();
 		}
 
 		Vector<T> ret(this->m_Size);
-		for (int i = 0;i < this->m_Size;++i) {
+		for (size_t i = 0;i < this->m_Size;++i) {
 			ret[i] = this->at(i) + val.at(i);
 		}
 		return ret;
 	}
+
+	//TODO: need to update this with the asaync flag
+	template<typename T>
+	inline constexpr Vector<T> Vector<T>::operator-(const Vector<T>& val) const
+	{
+		if (this->m_Size != val.m_Size) {
+			return Vector<T>();
+		}else if (this->m_isNULL || val.m_isNULL) {
+			return Vector<T>();
+		}
+
+		Vector<T> ret(this->m_Size, this->m_isAsync);
+		for (size_t i = 0;i < this->m_Size;++i) {
+			ret[i] = this->at(i) - val.at(i);
+		}
+		return ret;
+	}
+
+	template<typename T>
+	inline constexpr Vector<T> Vector<T>::operator*(const T & scalar) const
+	{
+		return Vector<T>();
+	}
+
+	template<typename T>
+	inline constexpr Vector<T> Vector<T>::operator*(const Vector<T>& val) const
+	{
+		return Vector<T>();
+	}
+
 	template<typename T>
 	inline constexpr bool Vector<T>::isNUll() const
 	{
