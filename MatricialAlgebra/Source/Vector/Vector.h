@@ -49,6 +49,8 @@ namespace MatricialAlgebra {
 		constexpr Vector<T> operator*(const T& scalar)const;
 
 		constexpr Vector<T> operator*(const Vector<T>& val)const;
+
+		void operator=(const Vector<T> &val);
 		
 		/*
 		returns the null flag value for this vector
@@ -146,6 +148,15 @@ namespace MatricialAlgebra {
 	inline constexpr Vector<T> Vector<T>::operator*(const Vector<T>& val) const
 	{
 		return Vector<T>();
+	}
+
+	template<typename T>
+	inline void Vector<T>::operator=(const Vector<T>& val)
+	{
+		this->m_isAsync = val.m_isAsync;
+		this->m_isNULL = val.m_isNULL;
+		this->m_Size = val.m_Size;
+		this->m_Vector = val.m_Vector;
 	}
 
 	template<typename T>
