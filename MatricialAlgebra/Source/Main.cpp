@@ -15,9 +15,11 @@ void main() {
 	b[1] = 5;
 
 	auto res = a*2;
+	double c = a.Norm();
 
 	cout << "x:" << res[0] << '\n';
 	cout << "y:" << res[1] << '\n';
+	cout << "norm:" << c << '\n';
 
 	system("pause");
 }

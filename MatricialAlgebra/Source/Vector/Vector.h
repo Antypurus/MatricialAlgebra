@@ -1,4 +1,5 @@
 #include<vector>
+#include<cmath>
 
 
 namespace MatricialAlgebra {
@@ -87,6 +88,8 @@ namespace MatricialAlgebra {
 		@return whether or not threading is being used
 		*/
 		constexpr bool isAsync()const;
+
+		constexpr double Norm()const;//tentative name
 	};
 
 	template<typename T>
@@ -227,5 +230,19 @@ namespace MatricialAlgebra {
 	inline constexpr bool Vector<T>::isAsync() const
 	{
 		return this->m_isAsync;
+	}
+
+	template<typename T>
+	inline constexpr double Vector<T>::Norm() const
+	{
+		double ret;
+		double sum=0;
+
+		for (size_t i = 0;i < this->m_Size;++i) {
+			sum += this->at(i)*this->at(i);
+		}
+		ret = sqrt(sum);
+
+		return ret;
 	}
 }
