@@ -15,7 +15,7 @@ void main() {
 	b[1] = 5;
 
 	auto res = a*2;
-	double c = a.Norm();
+	double c = a.Angle(b);
 
 	cout << "x:" << res[0] << '\n';
 	cout << "y:" << res[1] << '\n';

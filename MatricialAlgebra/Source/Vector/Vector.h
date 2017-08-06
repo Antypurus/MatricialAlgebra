@@ -1,8 +1,14 @@
 #include<vector>
 #include<cmath>
-
+#define _USE_MATH_DEFINES 
 
 namespace MatricialAlgebra {
+	
+	template<typename T>
+	constexpr double radianToDegree(const T val) {
+		return val*(M_PI / 180.0);
+	}
+
 	template<typename T>
 	class Vector {
 	private:
@@ -90,6 +96,8 @@ namespace MatricialAlgebra {
 		constexpr bool isAsync()const;
 
 		constexpr double Norm()const;//tentative name
+
+		constexpr double Angle(const Vector<T>&vec)const;//calculates the angle between the two vector in radians
 	};
 
 	template<typename T>
@@ -244,5 +252,21 @@ namespace MatricialAlgebra {
 		ret = sqrt(sum);
 
 		return ret;
+	}
+
+	template<typename T>
+	inline constexpr double Vector<T>::Angle(const Vector<T>& vec) const
+	{
+		if (this->m_Size != vec.m_Size||this->m_isNULL||vec.m_isNULL) {
+			return 361.0;//361 degrees is impossible as such this values is treated as an error value
+		}
+
+		double numerator=0;
+		for (size_t i = 0;i < this->m_Size;++i) {
+			numerator += this->at(i)*vec.at(i);
+		}
+
+		double denominator = this->Norm()*vec.Norm();
+		return acos(numerator / denominator);
 	}
 }
