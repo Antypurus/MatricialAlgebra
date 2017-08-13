@@ -4,9 +4,15 @@
 
 namespace MatricialAlgebra {
 	
+	/*
+	this function converts a value in radians to its correspondia value in degrees
+
+	@param val the value in radians
+	@return the value originally suplied in radians now in degrees
+	*/
 	template<typename T>
 	constexpr double radianToDegree(const T val) {
-		return val*(M_PI / 180.0);
+		return val*(M_PI / 180.0);//this comes from mathematics and does not need explaining
 	}
 
 	template<typename T>
