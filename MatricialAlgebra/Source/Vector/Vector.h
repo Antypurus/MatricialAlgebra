@@ -35,6 +35,7 @@ namespace MatricialAlgebra {
 		/*
 		Overload of the operator[] for acces to the data
 
+		@param 
 		@return a reference to the object in the data vector
 		*/
 		T& operator[](const size_t val);
@@ -42,6 +43,7 @@ namespace MatricialAlgebra {
 		/*
 		constant version of the operator[] overload
 
+		@param 
 		@return a constant reference to the object in the data vector
 		*/
 		const T& at(const size_t val)const;
@@ -66,11 +68,15 @@ namespace MatricialAlgebra {
 		returns a vector that is the product of a vector by a scalar
 
 		@param scalar - value of the scalar to multiply vector with
+		@return
 		*/
 		constexpr Vector<T> operator*(const T& scalar)const;
 
 		/*
 		cross product
+
+		@param
+		@return
 		*/
 		constexpr Vector<T> operator*(const Vector<T>& val)const;
 
@@ -95,8 +101,19 @@ namespace MatricialAlgebra {
 		*/
 		constexpr bool isAsync()const;
 
+		/*
+
+
+		@return
+		*/
 		constexpr double Norm()const;//tentative name
 
+		/*
+		this methoc calculates the angle between this vector and the suplied vector
+
+		@param vec - vector to calculate angle with
+		@return the angle between this and the vector passed as a parameter
+		*/
 		constexpr double Angle(const Vector<T>&vec)const;//calculates the angle between the two vector in radians
 	};
 
@@ -107,6 +124,16 @@ namespace MatricialAlgebra {
 		this->m_Size = size;
 		this->m_Vector = std::vector<T>(size);
 
+		/*
+			A vector of size 0 would be a vector in the 0th dimension
+			this is impossible and as such is an error , as such we 
+			denominate a vector of size 0 as a null object for this 
+			mathematical class vector , so as to be used when we 
+			need to indicate an operation is not possible of being 
+			resolved. We use this method over exception as it is easier
+			to work with , has better performance and should lead to less errors
+			in the long run.
+		*/
 		if (size == 0) {
 			this->m_isNULL = true;
 		}
@@ -135,7 +162,8 @@ namespace MatricialAlgebra {
 	constexpr inline Vector<T> Vector<T>::operator+(const Vector<T> & val) const
 	{
 
-		/*	If the mathematical vectors are not of the same size
+		/*	
+			If the mathematical vectors are not of the same size
 			the operation cannot be executed and therefore a NULL
 			object is returned
 			if one of the objects is null the sum can not proceed
@@ -157,7 +185,7 @@ namespace MatricialAlgebra {
 
 		Vector<T> ret(this->m_Size);	//vector where the sum of the vectors will be kept
 
-		if (this->m_isAsync) {
+		if (!this->m_isAsync) {
 
 			/*
 				if we are not going to use threading technology we merely 
